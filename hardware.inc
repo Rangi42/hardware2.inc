@@ -126,13 +126,13 @@ def BIT_SERIAL_CTL_TRANSFER equ 7 ; reading 1 = transfer in progress, writing 1 
   
 def BIT_SERIAL_CTL_CLOCK_SPD equ 1 ; (CGB only) 1 = use 2x faster internal clock [r/w]
   def MASK_SERIAL_CTL_CLOCK_SPD equ 1 << BIT_SERIAL_CTL_CLOCK_SPD
-    def SERIAL_CTL_LOW_SPD_CLK  equ 0 << BIT_SERIAL_CTL_CLK_SPD
-    def SERIAL_CTL_HIGH_SPD_CLK equ 1 << BIT_SERIAL_CTL_CLK_SPD
+    def SERIAL_CTL_LOW_SPD_CLK  equ 0 << BIT_SERIAL_CTL_CLOCK_SPD
+    def SERIAL_CTL_HIGH_SPD_CLK equ 1 << BIT_SERIAL_CTL_CLOCK_SPD
 
 def BIT_SERIAL_CTL_CLOCK_SEL equ 0 ; 0 = use external clock ("slave"), 1 = use internal clock ("master") [r/w]
   def MASK_SERIAL_CTL_CLOCK_SEL equ 1 << BIT_SERIAL_CTL_CLOCK_SEL
-    def SERIAL_CTL_EXTERNAL_CLK equ 0 << BIT_SERIAL_CTL_CLK_SEL
-    def SERIAL_CTL_INTERNAL_CLK equ 1 << BIT_SERIAL_CTL_CLK_SEL
+    def SERIAL_CTL_EXTERNAL_CLK equ 0 << BIT_SERIAL_CTL_CLOCK_SEL
+    def SERIAL_CTL_INTERNAL_CLK equ 1 << BIT_SERIAL_CTL_CLOCK_SEL
 
 ;------------------------------------------------------------------------------
 ; $FF03 is unused
@@ -455,11 +455,11 @@ def BIT_AUDIO_ENABLE equ 7 ; 0 = disable the APU, saving power [rw]
   def AUDIO_ENABLE_ON  equ 1 << BIT_AUDIO_ENABLE
 
 def BIT_AUDIO_ENABLE_CH4 equ 3 ; 1 = CH4 is running [ro]
-  def MASK_AUDIO_ENABLE_CH1 equ 1 << BIT_AUDIO_ENABLE_CH4
+  def MASK_AUDIO_ENABLE_CH4 equ 1 << BIT_AUDIO_ENABLE_CH4
 def BIT_AUDIO_ENABLE_CH3 equ 3 ; 1 = CH3 is running [ro]
-  def MASK_AUDIO_ENABLE_CH1 equ 1 << BIT_AUDIO_ENABLE_CH3
+  def MASK_AUDIO_ENABLE_CH3 equ 1 << BIT_AUDIO_ENABLE_CH3
 def BIT_AUDIO_ENABLE_CH2 equ 3 ; 1 = CH2 is running [ro]
-  def MASK_AUDIO_ENABLE_CH1 equ 1 << BIT_AUDIO_ENABLE_CH2
+  def MASK_AUDIO_ENABLE_CH2 equ 1 << BIT_AUDIO_ENABLE_CH2
 def BIT_AUDIO_ENABLE_CH1 equ 3 ; 1 = CH1 is running [ro]
   def MASK_AUDIO_ENABLE_CH1 equ 1 << BIT_AUDIO_ENABLE_CH1
 
@@ -480,7 +480,7 @@ def BIT_PPU_CTL_WINDOW_MAP equ 6 ; whether the Window is enabled                
 def BIT_PPU_CTL_WINDOW_ENA equ 5 ; which tilemap the Window reads from              [rw]
   def PPU_CTL_WINDOW_OFF equ 0 << BIT_PPU_CTL_WINDOW_ENA
   def PPU_CTL_WINDOW_ON  equ 1 << BIT_PPU_CTL_WINDOW_ENA
-r
+
 def BIT_PPU_CTL_TILES equ 4 ; which "tile blocks" the BG and Window use             [rw]
   def PPU_CTL_TILES_8800 equ 0 << BIT_PPU_CTL_TILES ; Blocks 2 and 1
   def PPU_CTL_TILES_8000 equ 1 << BIT_PPU_CTL_TILES ; Blocks 0 and 1
