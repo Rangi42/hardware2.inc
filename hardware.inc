@@ -250,7 +250,7 @@ def MASK_AUD1_ENV_PACE   equ %00000_111 ; how long between envelope iterations [
                                         ; (in 64 Hz ticks, ~ 15.6 ms apart)
 
 ;------------------------------------------------------------------------------
-; AUD1_PERIOD_LOW: Audio channel 1 period (low 8 bits) [rw]
+; AUD1_PERIOD_LOW: Audio channel 1 period (low 8 bits) [r/w]
 ;------------------------------------------------------------------------------
 def rAud1PeriodLow equ $ff13
 
@@ -262,9 +262,9 @@ def rAud1Ctl equ $ff14
 def BIT_AUD1_CTL_RESET equ 7 ; 1 = reset ("retrigger") the channel [wo]
   def AUD1_CTL_RESET equ 1 << BIT_AUD1_CTL_RESET
 
-def BIT_AUD1_CTL_LEN_ENABLE equ 6 ; 1 = kill the channel after the length timer expires [rw]
+def BIT_AUD1_CTL_LEN_ENABLE equ 6 ; 1 = reset the channel after the length timer expires [r/w]
 
-def MASK_AUD1_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "period"
+def MASK_AUD1_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "period" [r/w]
 
 
 ;------------------------------------------------------------------------------
@@ -300,7 +300,7 @@ def MASK_AUD2_ENV_PACE   equ %00000_111 ; how long between envelope iterations [
                                         ; (in 64 Hz ticks, ~ 15.6 ms apart)
 
 ;------------------------------------------------------------------------------
-; AUD2_PERIOD_LOW: Audio channel 2 period (low 8 bits) [rw]
+; AUD2_PERIOD_LOW: Audio channel 2 period (low 8 bits) [r/w]
 ;------------------------------------------------------------------------------
 def rAud2PeriodLow equ $ff18
 
@@ -312,7 +312,7 @@ def rAud2Ctl equ $ff19
 def BIT_AUD2_CTL_RESET equ 7 ; 1 = reset ("retrigger") the channel [wo]
   def AUD2_CTL_RESET equ 1 << BIT_AUD2_CTL_RESET
 
-def BIT_AUD2_CTL_LEN_ENABLE equ 6 ; 1 = kill the channel after the length timer expires [rw]
+def BIT_AUD2_CTL_LEN_ENABLE equ 6 ; 1 = reset the channel after the length timer expires [r/w]
 
 def MASK_AUD2_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "period"
 
@@ -322,7 +322,7 @@ def MASK_AUD2_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "pe
 ;------------------------------------------------------------------------------
 def rAud3Enable equ $ff1a
 
-def BIT_AUD3_ENABLE equ 7 ; whether the channel is active [rw]
+def BIT_AUD3_ENABLE equ 7 ; whether the channel is active [r/w]
   def AUD3_ENABLE_OFF equ 0 << BIT_AUD3_ENABLE
   def AUD3_ENABLE_ON  equ 1 << BIT_AUD3_ENABLE
 
@@ -336,14 +336,14 @@ def rAud3Len equ $ff1b
 ;------------------------------------------------------------------------------
 def rAud3Vol equ $ff1c
 
-def MASK_AUD3_VOLUME equ %0_11_00000 ; volume [rw]
+def MASK_AUD3_VOLUME equ %0_11_00000 ; volume [r/w]
   def AUD3_VOLUME_MUTE equ %0_00_00000 ; 0%
   def AUD3_VOLUME_100  equ %0_01_00000 ; 100%
   def AUD3_VOLUME_50   equ %0_10_00000 ; 50%
   def AUD3_VOLUME_25   equ %0_11_00000 ; 25%
 
 ;------------------------------------------------------------------------------
-; AUD3_PERIOD_LOW: Audio channel 3 period (low 8 bits) [rw]
+; AUD3_PERIOD_LOW: Audio channel 3 period (low 8 bits) [r/w]
 ;------------------------------------------------------------------------------
 def rAud3PeriodLow equ $ff1d
 
@@ -355,7 +355,7 @@ def rAud3Ctl equ $ff1e
 def BIT_AUD3_CTL_RESET equ 7 ; 1 = reset ("retrigger") the channel [wo]
   def AUD3_CTL_RESET equ 1 << BIT_AUD3_CTL_RESET
 
-def BIT_AUD3_CTL_LEN_ENABLE equ 6 ; 1 = kill the channel after the length timer expires [rw]
+def BIT_AUD3_CTL_LEN_ENABLE equ 6 ; 1 = reset the channel after the length timer expires [r/w]
 
 def MASK_AUD3_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "period"
 
@@ -368,7 +368,7 @@ def MASK_AUD3_CTL_PERIOD_HIGH equ %00000_111 ; upper 3 bits of the channel's "pe
 ;------------------------------------------------------------------------------
 def rAud4Len equ $ff20
 
-def MASK_AUD4_LEN_TIMER equ %00_111111 ; initial length timer [rw]
+def MASK_AUD4_LEN_TIMER equ %00_111111 ; initial length timer [r/w]
 
 ;------------------------------------------------------------------------------
 ; AUD4_ENV: Audio channel 4 volume and envelope
@@ -390,13 +390,13 @@ def MASK_AUD4_ENV_PACE   equ %00000_111 ; how long between envelope iterations [
 ;------------------------------------------------------------------------------
 def rAud4Noise equ $ff22
 
-def MASK_AUD4_NOISE_CLK_SHIFT equ %1111_0000 ; coarse control of the channel's period [rw]
+def MASK_AUD4_NOISE_CLK_SHIFT equ %1111_0000 ; coarse control of the channel's period [r/w]
 
-def BIT_AUD4_NOISE_WIDTH equ 3 ; controls the noise generator (LFSR)'s "width" [rw]
+def BIT_AUD4_NOISE_WIDTH equ 3 ; controls the noise generator (LFSR)'s "width" [r/w]
   def AUD4_NOISE_15BIT equ 0 << BIT_AUD4_NOISE_WIDTH
   def AUD4_NOISE_7BIT  equ 1 << BIT_AUD4_NOISE_WIDTH
 
-def MASK_AUD4_NOISE_CLK_DIV equ %00000_111 ; fine control of the channel's period [rw]
+def MASK_AUD4_NOISE_CLK_DIV equ %00000_111 ; fine control of the channel's period [r/w]
 
 ;------------------------------------------------------------------------------
 ; AUD4_CTL: Audio channel 4 control
@@ -406,7 +406,7 @@ def rAud4Ctl equ $ff23
 def BIT_AUD4_CTL_RESET equ 7 ; 1 = reset ("retrigger") the channel [wo]
   def AUD4_CTL_RESET equ 1 << BIT_AUD4_CTL_RESET
 
-def BIT_AUD4_CTL_LEN_ENABLE equ 6 ; 1 = kill the channel after the length timer expires [rw]
+def BIT_AUD4_CTL_LEN_ENABLE equ 6 ; 1 = reset the channel after the length timer expires [r/w]
 
 
 ;------------------------------------------------------------------------------
@@ -414,35 +414,35 @@ def BIT_AUD4_CTL_LEN_ENABLE equ 6 ; 1 = kill the channel after the length timer 
 ;------------------------------------------------------------------------------
 def rAudioVolume equ $ff24
 
-def BIT_AUDIO_VOLUME_VIN_LEFT equ 7 ; 1 = output VIN to left ear [rw]
+def BIT_AUDIO_VOLUME_VIN_LEFT equ 7 ; 1 = output VIN to left ear [r/w]
   def MASK_AUDIO_VOLUME_VIN_LEFT equ 1 << BIT_AUDIO_VOLUME_VIN_LEFT
-def MASK_AUDIO_VOLUME_LEFT equ %0_111_0000 ; 0 = barely audible, 7 = full volume [rw]
+def MASK_AUDIO_VOLUME_LEFT equ %0_111_0000 ; 0 = barely audible, 7 = full volume [r/w]
 
-def BIT_AUDIO_VOLUME_VIN_RIGHT equ 3 ; 1 = output VIN to right ear [rw]
+def BIT_AUDIO_VOLUME_VIN_RIGHT equ 3 ; 1 = output VIN to right ear [r/w]
   def MASK_AUDIO_VOLUME_VIN_RIGHT equ 1 << BIT_AUDIO_VOLUME_VIN_RIGHT
-def MASK_AUDIO_VOLUME_RIGHT equ %00000_111 ; 0 = barely audible, 7 = full volume [rw]
+def MASK_AUDIO_VOLUME_RIGHT equ %00000_111 ; 0 = barely audible, 7 = full volume [r/w]
 
 ;------------------------------------------------------------------------------
 ; AUDIO_MIX: Audio channel mixer
 ;------------------------------------------------------------------------------
 def rAudioMix equ $ff25
 
-def BIT_AUDIO_MIX_CH4_LEFT equ 7 ; 1 = output CH4 to left ear   [rw]
+def BIT_AUDIO_MIX_CH4_LEFT equ 7 ; 1 = output CH4 to left ear   [r/w]
   def MASK_AUDIO_MIX_CH4_LEFT equ 1 << BIT_AUDIO_MIX_CH4_LEFT
-def BIT_AUDIO_MIX_CH3_LEFT equ 6 ; 1 = output CH3 to left ear   [rw]
+def BIT_AUDIO_MIX_CH3_LEFT equ 6 ; 1 = output CH3 to left ear   [r/w]
   def MASK_AUDIO_MIX_CH3_LEFT equ 1 << BIT_AUDIO_MIX_CH3_LEFT
-def BIT_AUDIO_MIX_CH2_LEFT equ 5 ; 1 = output CH2 to left ear   [rw]
+def BIT_AUDIO_MIX_CH2_LEFT equ 5 ; 1 = output CH2 to left ear   [r/w]
   def MASK_AUDIO_MIX_CH2_LEFT equ 1 << BIT_AUDIO_MIX_CH2_LEFT
-def BIT_AUDIO_MIX_CH1_LEFT equ 4 ; 1 = output CH1 to left ear   [rw]
+def BIT_AUDIO_MIX_CH1_LEFT equ 4 ; 1 = output CH1 to left ear   [r/w]
   def MASK_AUDIO_MIX_CH1_LEFT equ 1 << BIT_AUDIO_MIX_CH1_LEFT
 
-def BIT_AUDIO_MIX_CH4_RIGHT equ 3 ; 1 = output CH4 to right ear [rw]
+def BIT_AUDIO_MIX_CH4_RIGHT equ 3 ; 1 = output CH4 to right ear [r/w]
   def MASK_AUDIO_MIX_CH4_RIGHT equ 1 << BIT_AUDIO_MIX_CH4_RIGHT
-def BIT_AUDIO_MIX_CH3_RIGHT equ 2 ; 1 = output CH3 to right ear [rw]
+def BIT_AUDIO_MIX_CH3_RIGHT equ 2 ; 1 = output CH3 to right ear [r/w]
   def MASK_AUDIO_MIX_CH3_RIGHT equ 1 << BIT_AUDIO_MIX_CH3_RIGHT
-def BIT_AUDIO_MIX_CH2_RIGHT equ 1 ; 1 = output CH2 to right ear [rw]
+def BIT_AUDIO_MIX_CH2_RIGHT equ 1 ; 1 = output CH2 to right ear [r/w]
   def MASK_AUDIO_MIX_CH2_RIGHT equ 1 << BIT_AUDIO_MIX_CH2_RIGHT
-def BIT_AUDIO_MIX_CH1_RIGHT equ 0 ; 1 = output CH1 to right ear [rw]
+def BIT_AUDIO_MIX_CH1_RIGHT equ 0 ; 1 = output CH1 to right ear [r/w]
   def MASK_AUDIO_MIX_CH1_RIGHT equ 1 << BIT_AUDIO_MIX_CH1_RIGHT
 
 ;------------------------------------------------------------------------------
@@ -450,7 +450,7 @@ def BIT_AUDIO_MIX_CH1_RIGHT equ 0 ; 1 = output CH1 to right ear [rw]
 ;------------------------------------------------------------------------------
 def rAudEnable equ $ff26
 
-def BIT_AUDIO_ENABLE equ 7 ; 0 = disable the APU, saving power [rw]
+def BIT_AUDIO_ENABLE equ 7 ; 0 = disable the APU, saving power [r/w]
   def AUDIO_ENABLE_OFF equ 0 << BIT_AUDIO_ENABLE
   def AUDIO_ENABLE_ON  equ 1 << BIT_AUDIO_ENABLE
 
@@ -469,38 +469,38 @@ def BIT_AUDIO_ENABLE_CH1 equ 3 ; 1 = CH1 is running [ro]
 ;------------------------------------------------------------------------------
 def rPPUCtl equ $ff40
 
-def BIT_PPU_CTL_POWER equ 7 ; whether the PPU (and LCD) are turned on               [rw]
+def BIT_PPU_CTL_POWER equ 7 ; whether the PPU (and LCD) are turned on               [r/w]
   def PPU_CTL_POWER_OFF equ 0 << BIT_PPU_CTL_POWER
   def PPU_CTL_POWER_ON  equ 1 << BIT_PPU_CTL_POWER
 
-def BIT_PPU_CTL_WINDOW_MAP equ 6 ; whether the Window is enabled                    [rw]
+def BIT_PPU_CTL_WINDOW_MAP equ 6 ; whether the Window is enabled                    [r/w]
   def PPU_CTL_WINDOW_MAP_9800 equ 0 << BIT_PPU_CTL_WINDOW_MAP
   def PPU_CTL_WINDOW_MAP_9C00 equ 1 << BIT_PPU_CTL_WINDOW_MAP
 
-def BIT_PPU_CTL_WINDOW_ENA equ 5 ; which tilemap the Window reads from              [rw]
+def BIT_PPU_CTL_WINDOW_ENA equ 5 ; which tilemap the Window reads from              [r/w]
   def PPU_CTL_WINDOW_OFF equ 0 << BIT_PPU_CTL_WINDOW_ENA
   def PPU_CTL_WINDOW_ON  equ 1 << BIT_PPU_CTL_WINDOW_ENA
 
-def BIT_PPU_CTL_TILES equ 4 ; which "tile blocks" the BG and Window use             [rw]
+def BIT_PPU_CTL_TILES equ 4 ; which "tile blocks" the BG and Window use             [r/w]
   def PPU_CTL_TILES_8800 equ 0 << BIT_PPU_CTL_TILES ; Blocks 2 and 1
   def PPU_CTL_TILES_8000 equ 1 << BIT_PPU_CTL_TILES ; Blocks 0 and 1
 
-def BIT_PPU_CTL_BG_MAP equ 3 ; which tilemap the BG reads from                      [rw]
+def BIT_PPU_CTL_BG_MAP equ 3 ; which tilemap the BG reads from                      [r/w]
   def PPU_CTL_BG_MAP_OFF equ 0 << BIT_PPU_CTL_BG_MAP
   def PPU_CTL_BG_MAP_ON  equ 1 << BIT_PPU_CTL_BG_MAP
 
-def BIT_PPU_CTL_OBJ_HEIGHT equ 2 ; how many pixels tall each OBJ is                 [rw]
+def BIT_PPU_CTL_OBJ_HEIGHT equ 2 ; how many pixels tall each OBJ is                 [r/w]
   def PPU_CTL_OBJ_HEIGHT_8  equ 0 << BIT_PPU_CTL_OBJ_HEIGHT
   def PPU_CTL_OBJ_HEIGHT_16 equ 1 << BIT_PPU_CTL_OBJ_HEIGHT
 
-def BIT_PPU_CTL_OBJ_ENA equ 1 ; whether OBJs are enabled                            [rw]
+def BIT_PPU_CTL_OBJ_ENA equ 1 ; whether OBJs are enabled                            [r/w]
   def PPU_CTL_OBJ_OFF equ 0 << BIT_PPU_CTL_OBJ_ENA
   def PPU_CTL_OBJ_ON  equ 1 << BIT_PPU_CTL_OBJ_ENA
 
-def BIT_PPU_CTL_BG equ 0 ; (DMG only) whether the BG is enabled                     [rw]
+def BIT_PPU_CTL_BG equ 0 ; (DMG only) whether the BG is enabled                     [r/w]
   def PPU_CTL_BG_OFF equ 0 << BIT_PPU_CTL_BG
   def PPU_CTL_BG_ON  equ 1 << BIT_PPU_CTL_BG
-def BIT_PPU_CTL_PRIO equ 0 ; (CGB only) whether OBJ-to-BG priority bits are honored [rw]
+def BIT_PPU_CTL_PRIO equ 0 ; (CGB only) whether OBJ-to-BG priority bits are honored [r/w]
   def PPU_CTL_PRIO_IGN equ 0 << BIT_PPU_CTL_BG
   def PPU_CTL_PRIO_ENA equ 1 << BIT_PPU_CTL_BG
 
