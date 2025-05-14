@@ -556,17 +556,17 @@ def rScanlineCmp equ $ff45
 def rOamDma equ $ff46
 
 ;------------------------------------------------------------------------------
-; BG_PALETTE: (DMG only) Background color mapping [r/w]
+; BG_PALETTE (DMG only): Background color mapping [r/w]
 ;------------------------------------------------------------------------------
 def rBgPalette equ $ff47
 
 ;------------------------------------------------------------------------------
-; OBJ_PALETTE0: (DMG only) OBJ color mapping #0 [r/w]
+; OBJ_PALETTE0 (DMG only): OBJ color mapping #0 [r/w]
 ;------------------------------------------------------------------------------
 def rObjPalette0 equ $ff48
 
 ;------------------------------------------------------------------------------
-; OBJ_PALETTE1: (DMG only) OBJ color mapping #1 [r/w]
+; OBJ_PALETTE1 (DMG only): OBJ color mapping #1 [r/w]
 ;------------------------------------------------------------------------------
 def rObjPalette1 equ $ff49
 
@@ -583,7 +583,7 @@ def rWinXCoord equ $ff4b
 def WIN_X_COORD_OFFSET equ 7 ; Subtract this to get the actual Window Y coordinate
 
 ;------------------------------------------------------------------------------
-; SYS_CTL: (CGB boot ROM only) System mode
+; SYS_CTL (CGB boot ROM only): System mode
 ;------------------------------------------------------------------------------
 def rSysCtl equ $ff4c
 
@@ -594,7 +594,7 @@ def MASK_SYS_CTL_MODE equ %0000_11_00 ; current system mode [r/w]
     def SYS_CTL_MODE_PGB2 equ %0000_11_00 ; LCD is driven externally, CPU is running
 
 ;------------------------------------------------------------------------------
-; CLOCK_CTL: (CGB only) Double-speed mode control
+; CLOCK_CTL (CGB only): Double-speed mode control
 ;------------------------------------------------------------------------------
 def rClockCtl equ $ff4d
 
@@ -610,14 +610,14 @@ def CLOCK_CTL_ARM_SWITCH equ 1 << BIT_CLOCK_CTL_ARMED
 ;------------------------------------------------------------------------------
 
 ;------------------------------------------------------------------------------
-; VRAM_BANK: (CGB only) VRAM bank number
+; VRAM_BANK (CGB only): VRAM bank number
 ;------------------------------------------------------------------------------
 def rVramBank equ $ff4f
 
 def MASK_VRAM_BANK equ %0000000_1 ; mapped VRAM bank [r/w]
 
 ;------------------------------------------------------------------------------
-; BOOT_ROM_CTL: (boot ROM only) Boot ROM mapping control
+; BOOT_ROM_CTL (boot ROM only): Boot ROM mapping control
 ;------------------------------------------------------------------------------
 def rBootRomCtl equ $ff50
 
@@ -626,27 +626,27 @@ def BIT_BOOT_ROM_CTL_MAPPING equ 0 ; whether the boot ROM is mapped [wo]
     def BOOT_ROM_CTL_MAPPING_OFF equ 1 << BIT_BOOT_ROM_CTL_MAPPING
 
 ;------------------------------------------------------------------------------
-; VDMA_SRC_HIGH: (CGB only) VRAM DMA source address (high 8 bits) [wo]
+; VDMA_SRC_HIGH (CGB only): VRAM DMA source address (high 8 bits) [wo]
 ;------------------------------------------------------------------------------
 def rVDMASrcHigh equ $ff51
 
 ;------------------------------------------------------------------------------
-; VDMA_SRC_LOW: (CGB only) VRAM DMA source address (low 8 bits) [wo]
+; VDMA_SRC_LOW (CGB only): VRAM DMA source address (low 8 bits) [wo]
 ;------------------------------------------------------------------------------
 def rVDMASrcLow equ $ff52
 
 ;------------------------------------------------------------------------------
-; VDMA_DEST_HIGH: (CGB only) VRAM DMA destination address (high 8 bits) [wo]
+; VDMA_DEST_HIGH (CGB only): VRAM DMA destination address (high 8 bits) [wo]
 ;------------------------------------------------------------------------------
 def rVDMADestHigh equ $ff53
 
 ;------------------------------------------------------------------------------
-; VDMA_DEST_LOW: (CGB only) VRAM DMA destination address (low 8 bits) [wo]
+; VDMA_DEST_LOW (CGB only): VRAM DMA destination address (low 8 bits) [wo]
 ;------------------------------------------------------------------------------
 def rVDMADestLow equ $ff54
 
 ;------------------------------------------------------------------------------
-; VDMA_LEN: (CGB only) VRAM DMA length, mode, and start
+; VDMA_LEN (CGB only): VRAM DMA length, mode, and start
 ;------------------------------------------------------------------------------
 def rVDMALen equ $ff55
 
@@ -659,7 +659,7 @@ def BIT_VDMA_LEN_ACTIVE equ 7 ; on read: is a VRAM DMA active?
 def MASK_VDMA_LEN_SIZE equ %0_1111111 ; how many 16-byte blocks to transfer [r/w]
 
 ;------------------------------------------------------------------------------
-; IR_CTL: (CGB only) Infrared port control
+; IR_CTL (CGB only): Infrared port control
 ;------------------------------------------------------------------------------
 def rIRCtl equ $ff56
 
@@ -677,7 +677,7 @@ def BIT_IR_CTL_SEND equ 0 ; whether IR light is being sent [r/w]
 ;------------------------------------------------------------------------------
 
 ;------------------------------------------------------------------------------
-; BG_PAL_ADDR: (CGB only) Background palette I/O address
+; BG_PAL_ADDR (CGB only): Background palette I/O address
 ;------------------------------------------------------------------------------
 def rBgPalAddr equ $ff68
 
@@ -688,12 +688,12 @@ def BIT_BG_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented aft
 def MASK_BG_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed via BG_PAL_DATA [r/w]
 
 ;------------------------------------------------------------------------------
-; BG_PAL_DATA: (CGB only) Background palette I/O access [r/w]
+; BG_PAL_DATA (CGB only): Background palette I/O access [r/w]
 ;------------------------------------------------------------------------------
 def rBgPalData equ $ff69
 
 ;------------------------------------------------------------------------------
-; OBJ_PAL_ADDR: (CGB only) OBJ palette I/O address
+; OBJ_PAL_ADDR (CGB only): OBJ palette I/O address
 ;------------------------------------------------------------------------------
 def rObjPalAddr equ $ff6a
 
@@ -705,12 +705,12 @@ def BIT_OBJ_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented af
                                          ; via OBJ_PAL_DATA [r/w]
 
 ;------------------------------------------------------------------------------
-; OBJ_PAL_DATA: (CGB only) OBJ palette I/O access [r/w]
+; OBJ_PAL_DATA (CGB only): OBJ palette I/O access [r/w]
 ;------------------------------------------------------------------------------
 def rObjPalData equ $ff6b
 
 ;------------------------------------------------------------------------------
-; OBJ_DRAW_PRIO: (CGB boot ROM only)
+; OBJ_DRAW_PRIO (CGB boot ROM only): OBJ draw priority mode
 ;------------------------------------------------------------------------------
 def rObjDrawPrio equ $ff6c
 
@@ -723,7 +723,7 @@ def BIT_OBJ_DRAW_PRIO equ 0 ; which drawing priority is used for OBJs [r/w]
 ;------------------------------------------------------------------------------
 
 ;------------------------------------------------------------------------------
-; WRAM_BANK: (CGB only) WRAM bank number
+; WRAM_BANK (CGB only): WRAM bank number
 ;------------------------------------------------------------------------------
 def rWramBank equ $ff70
 
@@ -734,7 +734,7 @@ def MASK_WRAM_BANK equ %00000_111 ; mapped WRAM bank [r/w]
 ;------------------------------------------------------------------------------
 
 ;------------------------------------------------------------------------------
-; AUD_OUT12: (CGB only) Audio channels 1 and 2 output
+; AUD_OUT12 (CGB only): Audio channels 1 and 2 output
 ;------------------------------------------------------------------------------
 def rAudOut12 equ $ff76
 
@@ -742,7 +742,7 @@ def MASK_AUD_OUT12_CH2 equ %1111_0000 ; audio channel 2 output
 def MASK_AUD_OUT12_CH1 equ %0000_1111 ; audio channel 1 output
 
 ;------------------------------------------------------------------------------
-; AUD_OUT34: (CGB only) Audio channels 3 and 4 output
+; AUD_OUT34 (CGB only): Audio channels 3 and 4 output
 ;------------------------------------------------------------------------------
 def rAudOut34 equ $ff77
 
