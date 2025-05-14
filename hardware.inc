@@ -601,8 +601,8 @@ def BIT_OBJ_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented af
                                    ; each **write** to OBJ_PAL_DATA [r/w]
     def OBJ_PAL_ADDR_AUTOINC equ 1 << BIT_OBJ_PAL_ADDR_AUTOINC
 
-    def MASK_OBJ_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed
-                                         ; via OBJ_PAL_DATA [r/w]
+def MASK_OBJ_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed
+                                     ; via OBJ_PAL_DATA [r/w]
 
 ; -- OBJ_PAL_DATA (CGB only): OBJ palette I/O access [r/w] --------------------
 def rObjPalData equ $ff6b
