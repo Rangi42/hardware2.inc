@@ -729,5 +729,51 @@ def BIT_SRAM_BANK_RUMBLE equ 3
 def rRtcLatch equ $6000
 
 
+; *****************************************************************************
+; *                         Screen-related constants                          *
+; *****************************************************************************
+
+def SCREEN_HEIGHT_PX equ 144
+def SCREEN_WIDTH_PX  equ 160
+def SCREEN_HEIGHT_TILES equ 18
+def SCREEN_WIDTH_TILES  equ 20
+
+def TILEMAP_HEIGHT_PX equ 256
+def TILEMAP_WIDTH_PX  equ 256
+def TILEMAP_HEIGHT_TILES equ 32
+def TILEMAP_WIDTH_TILES  equ 32
+
+
+; *****************************************************************************
+; *                           OBJ-related constants                           *
+; *****************************************************************************
+
+rsreset
+def Obj_YPos  rb
+	def OBJ_Y_OFFSET equ 16 ; Subtract 16 from what's written to OAM to get the real Y position
+def Obj_XPos  rb
+	def OBJ_X_OFFSET equ 8 ; Subtract 8 from what's written to OAM to get the real X position
+def Obj_Tile  rb
+def Obj_Attrs rb
+	def BIT_OBJ_ATTR_PRIORITY equ 7 ; whether the OBJ is drawn above BG colors 1-3
+		def OBJ_ATTR_ABOVE_BG  equ 0 << BIT_OBJ_ATTR_PRIORITY
+		def OBJ_ATTR_BEHIND_BG equ 1 << BIT_OBJ_ATTR_PRIORITY
+	def BIT_OBJ_ATTR_Y_FLIP   equ 6 ; whether the whole OBJ is flipped vertically
+		def OBJ_ATTR_Y_UNFLIPPED equ 0 << BIT_OBJ_ATTR_Y_FLIP
+		def OBJ_ATTR_Y_FLIPPED   equ 1 << BIT_OBJ_ATTR_Y_FLIP
+	def BIT_OBJ_ATTR_X_FLIP   equ 5 ; whether the whole OBJ is flipped horizontally
+		def OBJ_ATTR_X_UNFLIPPED equ 0 << BIT_OBJ_ATTR_X_FLIP
+		def OBJ_ATTR_X_FLIPPED   equ 1 << BIT_OBJ_ATTR_X_FLIP
+	def BIT_OBJ_ATTR_PALETTE  equ 4 ; (DMG only) which of the two palettes the OBJ uses
+		def OBJ_ATTR_PALETTE_0 equ 0 << BIT_OBJ_ATTR_PALETTE
+		def OBJ_ATTR_PALETTE_1 equ 1 << BIT_OBJ_ATTR_PALETTE
+	def BIT_OBJ_ATTR_BANK     equ 3 ; (CGB only) which VRAM bank the OBJ takes its tile(s) from
+		def OBJ_ATTR_BANK_0 equ 0 << BIT_OBJ_ATTR_BANK
+		def OBJ_ATTR_BANK_1 equ 1 << BIT_OBJ_ATTR_BANK
+	def MASK_OBJ_ATTR_PALETTE equ %00000_111 ; (CGB only) which palette the OBJ uses
+def sizeof_Obj rb 0
+
+def NB_OBJS equ 40 ; How many OBJs there are room for in OAM
+
 
 endc ; def(HARDWARE_INC)
