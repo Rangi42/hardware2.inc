@@ -29,9 +29,9 @@ def HARDWARE_INC_VERSION equs "5.0.0"
 ;     check_hardware_inc_version 1.2   (equivalent to 1.2.0)
 ;     check_hardware_inc_version 1     (equivalent to 1.0.0)
 MACRO check_hardware_inc_version
-        def hw_inc_cur_ver\@ equs strrpl("{HARDWARE_INC_VERSION}", ".", ",")
-        def hw_inc_min_ver\@ equs strrpl("\1", ".", ",")
-        def hw_inc_def_check\@ equs """MACRO hw_inc_check\@
+    def hw_inc_cur_ver\@ equs strrpl("{HARDWARE_INC_VERSION}", ".", ",")
+    def hw_inc_min_ver\@ equs strrpl("\1", ".", ",")
+    def hw_inc_def_check\@ equs """MACRO hw_inc_check\@
         if \\1 != \\4 || (\\2 < \\5 || (\\2 == \\5 && \\3 < \\6))
             fail "Version \\1.\\2.\\3 of 'hardware.inc' is incompatible with minimum version \\4.\\5.\\6"
         endc
@@ -118,7 +118,8 @@ def rSerialData equ $ff01
 
 def rSerialCtl equ $ff02
 
-def BIT_SERIAL_CTL_TRANSFER equ 7 ; reading 1 = transfer in progress, writing 1 = start transfer [r/w]
+def BIT_SERIAL_CTL_TRANSFER equ 7 ; reading 1 = transfer in progress,
+                                  ; writing 1 = start transfer [r/w]
     def MASK_SERIAL_CTL_TRANSFER equ 1 << BIT_SERIAL_CTL_TRANSFER
         def SERIAL_CTL_TRANSFER_OFF equ 0 << BIT_SERIAL_CTL_TRANSFER
         def SERIAL_CTL_TRANSFER_ON  equ 1 << BIT_SERIAL_CTL_TRANSFER
@@ -128,7 +129,8 @@ def BIT_SERIAL_CTL_CLOCK_SPD equ 1 ; (CGB only) 1 = use 2x faster internal clock
         def SERIAL_CTL_LOW_SPD_CLK  equ 0 << BIT_SERIAL_CTL_CLOCK_SPD
         def SERIAL_CTL_HIGH_SPD_CLK equ 1 << BIT_SERIAL_CTL_CLOCK_SPD
 
-def BIT_SERIAL_CTL_CLOCK_SEL equ 0 ; 0 = use external clock ("slave"), 1 = use internal clock ("master") [r/w]
+def BIT_SERIAL_CTL_CLOCK_SEL equ 0 ; 0 = use external clock ("slave"),
+                                   ; 1 = use internal clock ("master") [r/w]
     def MASK_SERIAL_CTL_CLOCK_SEL equ 1 << BIT_SERIAL_CTL_CLOCK_SEL
         def SERIAL_CTL_EXTERNAL_CLK equ 0 << BIT_SERIAL_CTL_CLOCK_SEL
         def SERIAL_CTL_INTERNAL_CLK equ 1 << BIT_SERIAL_CTL_CLOCK_SEL
@@ -215,7 +217,8 @@ def BIT_AUD1_SWEEP_DIR   equ 3 ; sweep direction [r/w]
         def AUD1_SWEEP_UP   equ 0 << BIT_AUD1_SWEEP_DIR
         def AUD1_SWEEP_DOWN equ 1 << BIT_AUD1_SWEEP_DIR
 
-def MASK_AUD1_SWEEP_STEP equ %00000_111 ; how much the period increases/decreases per iteration [r/w]
+def MASK_AUD1_SWEEP_STEP equ %00000_111 ; how much the period increases or
+                                        ; decreases per iteration [r/w]
 
 ;------------------------------------------------------------------------------
 ; AUD1_LEN: Audio channel 1 length timer and duty cycle
@@ -523,7 +526,7 @@ def BIT_PPU_STATUS_Y_MATCH      equ 2 ; 1 = CUR_SCANLINE is currently equal to S
 def MASK_PPU_STATUS_MODE equ %000000_11 ; PPU's current status [ro]
     def PPU_STATUS_MODE_HBLANK    equ %000000_00 ; Waiting after a line's rendering
     def PPU_STATUS_MODE_VBLANK    equ %000000_01 ; Waiting between frames
-    def PPU_STATUS_MODE_OAM_SCAN  equ %000000_10 ; Determining which OBJs will be rendered on this line
+    def PPU_STATUS_MODE_OAM_SCAN  equ %000000_10 ; Checking which OBJs will be rendered on this line
     def PPU_STATUS_MODE_RENDERING equ %000000_11 ; Pushing pixels to the LCD
         def MASK_PPU_STATUS_MODE_BUSY equ %000000_1_0 ; Indicates that the PPU is currently busy
 
@@ -577,7 +580,7 @@ def rWinYCoord equ $ff4a
 ;------------------------------------------------------------------------------
 def rWinXCoord equ $ff4b
 
-def WIN_X_COORD_OFFSET equ 7 ; Subtract this from what's written to this register for the actual Y coordinate
+def WIN_X_COORD_OFFSET equ 7 ; Subtract this to get the actual Window Y coordinate
 
 ;------------------------------------------------------------------------------
 ; SYS_CTL: (CGB boot ROM only) System mode
@@ -678,7 +681,8 @@ def BIT_IR_CTL_SEND equ 0 ; whether IR light is being sent [r/w]
 ;------------------------------------------------------------------------------
 def rBgPalAddr equ $ff68
 
-def BIT_BG_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented after each **write** to BG_PAL_DATA [r/w]
+def BIT_BG_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented after
+                                  ; each **write** to BG_PAL_DATA [r/w]
     def BG_PAL_ADDR_AUTOINC equ 1 << BIT_BG_PAL_ADDR_AUTOINC
 
 def MASK_BG_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed via BG_PAL_DATA [r/w]
@@ -693,10 +697,12 @@ def rBgPalData equ $ff69
 ;------------------------------------------------------------------------------
 def rObjPalAddr equ $ff6a
 
-def BIT_OBJ_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented after each **write** to OBJ_PAL_DATA [r/w]
+def BIT_OBJ_PAL_ADDR_AUTOINC equ 7 ; whether the address field is incremented after
+                                   ; each **write** to OBJ_PAL_DATA [r/w]
     def OBJ_PAL_ADDR_AUTOINC equ 1 << BIT_OBJ_PAL_ADDR_AUTOINC
 
-    def MASK_OBJ_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed via OBJ_PAL_DATA [r/w]
+    def MASK_OBJ_PAL_ADDR equ %00_111111 ; the address within Palette RAM accessed
+                                         ; via OBJ_PAL_DATA [r/w]
 
 ;------------------------------------------------------------------------------
 ; OBJ_PAL_DATA: (CGB only) OBJ palette I/O access [r/w]
