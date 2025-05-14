@@ -673,6 +673,61 @@ def BIT_INTR_ENABLED_VBLANK equ 0 ; 1 = VBlank interrupt is enabled [r/w]
 ; *****************************************************************************
 ; *                         Cartridge registers (MBC)                         *
 ; *****************************************************************************
+; Note that these "registers" are each actually accessible at an entire address range;
+; however, one address for each of these ranges is considered the "canonical" one, and
+; these addresses are what's provided here.
+
+; -- SRAM_ENABLE: Whether SRAM can be accessed --------------------------------
+if !def(TPP1)
+	def rSramEnable equ $0000
+endc
+
+def SRAM_DISABLE equ $00
+def SRAM_ENABLE equ $0A ; Note that some MBCs accept any value whose low 4 bits are A;
+                        ; $0A remains the canonical (and preferred) value.
+
+; -- ROM_BANK: ROM bank number (low 8 bits when applicable) -------------------
+if def(TPP1)
+	def rRomBank equ $0000
+elif def(MBC2)
+	def rRomBank equ $2100
+else
+	def rRomBank equ $2000
+endc
+
+; -- ROM_BANK_HIGH: ROM bank number (high 8 bits) -----------------------------
+if def(TPP1)
+	def rRomBankHigh equ $0001
+else ; MBC5 only
+	def rRomBankHigh equ $3000
+endc
+
+; -- SRAM_BANK: SRAM bank number ----------------------------------------------
+if def(TPP1)
+	def rSramBank equ $0002
+else
+	def rSramBank equ $4000
+endc
+
+; Special RAM bank numbers that actually map the MBC3's RTC registers
+def SRAM_BANK_RTC_SEC      equ 8
+def SRAM_BANK_RTC_MIN      equ 9
+def SRAM_BANK_RTC_HOUR     equ 10
+def SRAM_BANK_RTC_DAY_LOW  equ 11
+def SRAM_BANK_RTC_DAY_HIGH equ 12
+	def BIT_RTC_DAY_HIGH_CARRY equ 7
+	def BIT_RTC_DAY_HIGH_HALT  equ 6
+    def BIT_RTC_DAY_HIGH_DAY   equ 0
+
+; MBCs with rumble have it controlled by one bit of the SRAM bank number
+def BIT_SRAM_BANK_RUMBLE equ 3
+    def MASK_SRAM_BANK_RUMBLE equ 1 << BIT_SRAM_BANK_RUMBLE
+   		def SRAM_BANK_RUMBLE_OFF equ 0 << BIT_SRAM_BANK_RUMBLE
+    	def SRAM_BANK_RUMBLE_ON  equ 1 << BIT_SRAM_BANK_RUMBLE
+
+; -- RTC_LATCH: Write 0 then 1 to this register to latch the MBC3 RTC ---------
+def rRtcLatch equ $6000
+
 
 
 endc ; def(HARDWARE_INC)
