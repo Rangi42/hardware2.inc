@@ -181,28 +181,28 @@ def rIntrPending equ $ff0f
 
 def BIT_INTR_PENDING_JOYPAD equ 4 ; 1 = Joypad interrupt is pending [r/w]
     def MASK_INTR_PENDING_JOYPAD equ 1 << BIT_INTR_PENDING_JOYPAD
-        def rINTR_PENDING_JOYPAD_OFF equ 0 << BIT_INTR_PENDING_JOYPAD
-        def rINTR_PENDING_JOYPAD_ON  equ 1 << BIT_INTR_PENDING_JOYPAD
+        def INTR_PENDING_JOYPAD_OFF equ 0 << BIT_INTR_PENDING_JOYPAD
+        def INTR_PENDING_JOYPAD_ON  equ 1 << BIT_INTR_PENDING_JOYPAD
 
 def BIT_INTR_PENDING_SERIAL equ 3 ; 1 = Serial interrupt is pending [r/w]
     def MASK_INTR_PENDING_SERIAL equ 1 << BIT_INTR_PENDING_SERIAL
-        def rINTR_PENDING_SERIAL_OFF equ 0 << BIT_INTR_PENDING_SERIAL
-        def rINTR_PENDING_SERIAL_ON  equ 1 << BIT_INTR_PENDING_SERIAL
+        def INTR_PENDING_SERIAL_OFF equ 0 << BIT_INTR_PENDING_SERIAL
+        def INTR_PENDING_SERIAL_ON  equ 1 << BIT_INTR_PENDING_SERIAL
 
 def BIT_INTR_PENDING_TIMER equ 2 ; 1 =  Timer interrupt is pending [r/w]
     def MASK_INTR_PENDING_TIMER equ 1 << BIT_INTR_PENDING_TIMER
-        def rINTR_PENDING_TIMER_OFF equ 0 << BIT_INTR_PENDING_TIMER
-        def rINTR_PENDING_TIMER_ON  equ 1 << BIT_INTR_PENDING_TIMER
+        def INTR_PENDING_TIMER_OFF equ 0 << BIT_INTR_PENDING_TIMER
+        def INTR_PENDING_TIMER_ON  equ 1 << BIT_INTR_PENDING_TIMER
 
 def BIT_INTR_PENDING_PPU    equ 1 ; 1 =    PPU interrupt is pending [r/w]
     def MASK_INTR_PENDING_PPU equ 1 << BIT_INTR_PENDING_PPU
-        def rINTR_PENDING_PPU_OFF equ 0 << BIT_INTR_PENDING_PPU
-        def rINTR_PENDING_PPU_ON  equ 1 << BIT_INTR_PENDING_PPU
+        def INTR_PENDING_PPU_OFF equ 0 << BIT_INTR_PENDING_PPU
+        def INTR_PENDING_PPU_ON  equ 1 << BIT_INTR_PENDING_PPU
 
 def BIT_INTR_PENDING_VBLANK equ 0 ; 1 = VBlank interrupt is pending [r/w]
     def MASK_INTR_PENDING_VBLANK equ 1 << BIT_INTR_PENDING_VBLANK
-        def rINTR_PENDING_VBLANK_OFF equ 0 << BIT_INTR_PENDING_VBLANK
-        def rINTR_PENDING_VBLANK_ON  equ 1 << BIT_INTR_PENDING_VBLANK
+        def INTR_PENDING_VBLANK_OFF equ 0 << BIT_INTR_PENDING_VBLANK
+        def INTR_PENDING_VBLANK_ON  equ 1 << BIT_INTR_PENDING_VBLANK
 
 ;------------------------------------------------------------------------------
 ; AUD1_SWEEP: Audio channel 1 sweep
@@ -760,28 +760,28 @@ def rIntrEnabled equ $ffff
 
 def BIT_INTR_ENABLED_JOYPAD   equ 4 ; 1 = Joypad interrupt is enabled [r/w]
     def MASK_INTR_ENABLED_JOYPAD equ 1 << BIT_INTR_ENABLED_JOYPAD
-    def rINTR_ENABLED_JOYPAD_OFF equ 0 << BIT_INTR_ENABLED_JOYPAD
-    def rINTR_ENABLED_JOYPAD_ON  equ 1 << BIT_INTR_ENABLED_JOYPAD
+	    def INTR_ENABLED_JOYPAD_OFF equ 0 << BIT_INTR_ENABLED_JOYPAD
+	    def INTR_ENABLED_JOYPAD_ON  equ 1 << BIT_INTR_ENABLED_JOYPAD
 
-    def BIT_INTR_ENABLED_SERIAL equ 3 ; 1 = Serial interrupt is enabled [r/w]
+def BIT_INTR_ENABLED_SERIAL equ 3 ; 1 = Serial interrupt is enabled [r/w]
     def MASK_INTR_ENABLED_SERIAL equ 1 << BIT_INTR_ENABLED_SERIAL
-    def rINTR_ENABLED_SERIAL_OFF equ 0 << BIT_INTR_ENABLED_SERIAL
-    def rINTR_ENABLED_SERIAL_ON  equ 1 << BIT_INTR_ENABLED_SERIAL
+	    def INTR_ENABLED_SERIAL_OFF equ 0 << BIT_INTR_ENABLED_SERIAL
+	    def INTR_ENABLED_SERIAL_ON  equ 1 << BIT_INTR_ENABLED_SERIAL
 
-    def BIT_INTR_ENABLED_TIMER  equ 2 ; 1 =  Timer interrupt is enabled [r/w]
+def BIT_INTR_ENABLED_TIMER  equ 2 ; 1 =  Timer interrupt is enabled [r/w]
     def MASK_INTR_ENABLED_TIMER equ 1 << BIT_INTR_ENABLED_TIMER
-    def rINTR_ENABLED_TIMER_OFF equ 0 << BIT_INTR_ENABLED_TIMER
-    def rINTR_ENABLED_TIMER_ON  equ 1 << BIT_INTR_ENABLED_TIMER
+	    def INTR_ENABLED_TIMER_OFF equ 0 << BIT_INTR_ENABLED_TIMER
+	    def INTR_ENABLED_TIMER_ON  equ 1 << BIT_INTR_ENABLED_TIMER
 
-    def BIT_INTR_ENABLED_PPU    equ 1 ; 1 =    PPU interrupt is enabled [r/w]
+def BIT_INTR_ENABLED_PPU    equ 1 ; 1 =    PPU interrupt is enabled [r/w]
     def MASK_INTR_ENABLED_PPU equ 1 << BIT_INTR_ENABLED_PPU
-    def rINTR_ENABLED_PPU_OFF equ 0 << BIT_INTR_ENABLED_PPU
-    def rINTR_ENABLED_PPU_ON  equ 1 << BIT_INTR_ENABLED_PPU
+	    def INTR_ENABLED_PPU_OFF equ 0 << BIT_INTR_ENABLED_PPU
+	    def INTR_ENABLED_PPU_ON  equ 1 << BIT_INTR_ENABLED_PPU
 
-    def BIT_INTR_ENABLED_VBLANK equ 0 ; 1 = VBlank interrupt is enabled [r/w]
+def BIT_INTR_ENABLED_VBLANK equ 0 ; 1 = VBlank interrupt is enabled [r/w]
     def MASK_INTR_ENABLED_VBLANK equ 1 << BIT_INTR_ENABLED_VBLANK
-    def rINTR_ENABLED_VBLANK_OFF equ 0 << BIT_INTR_ENABLED_VBLANK
-    def rINTR_ENABLED_VBLANK_ON  equ 1 << BIT_INTR_ENABLED_VBLANK
+	    def INTR_ENABLED_VBLANK_OFF equ 0 << BIT_INTR_ENABLED_VBLANK
+	    def INTR_ENABLED_VBLANK_ON  equ 1 << BIT_INTR_ENABLED_VBLANK
 
 ; TODO: MBC registers
 
