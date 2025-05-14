@@ -32,7 +32,7 @@ MACRO check_hardware_inc_version
     def hw_inc_cur_ver\@ equs strrpl("{HARDWARE_INC_VERSION}", ".", ",")
     def hw_inc_min_ver\@ equs strrpl("\1", ".", ",")
     def hw_inc_def_check\@ equs """MACRO hw_inc_check\@
-        if (\\1) < (\\4) || ((\1) == (\\4) && ((\\2) < (\\5) || ((\\2) == (\\5) && (\\3) < (\\6))))
+        if \\1 != \\4 || (\\2 < \\5 || (\\2 == \\5 && \\3 < \\6))
             fail "Version \\1.\\2.\\3 of 'hardware.inc' is incompatible with minimum version \\4.\\5.\\6"
         endc
     \nENDM"""
