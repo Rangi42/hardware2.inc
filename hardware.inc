@@ -716,8 +716,11 @@ def SRAM_BANK_RTC_HOUR     equ 10
 def SRAM_BANK_RTC_DAY_LOW  equ 11
 def SRAM_BANK_RTC_DAY_HIGH equ 12
 	def BIT_RTC_DAY_HIGH_CARRY equ 7
+		def MASK_RTC_DAY_HIGH_CARRY equ 1 << BIT_RTC_DAY_HIGH_CARRY
 	def BIT_RTC_DAY_HIGH_HALT  equ 6
+		def MASK_RTC_DAY_HIGH_HALT  equ 1 << BIT_RTC_DAY_HIGH_HALT
     def BIT_RTC_DAY_HIGH_DAY   equ 0
+    	def MASK_RTC_DAY_HIGH_DAY   equ 1 << BIT_RTC_DAY_HIGH_DAY
 
 ; MBCs with rumble have it controlled by one bit of the SRAM bank number
 def BIT_SRAM_BANK_RUMBLE equ 3
