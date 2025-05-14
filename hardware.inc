@@ -411,11 +411,11 @@ def BIT_PPU_CTL_POWER      equ 7 ; whether the PPU (and LCD) are turned on      
   def PPU_CTL_POWER_OFF equ 0 << BIT_PPU_CTL_POWER
   def PPU_CTL_POWER_ON  equ 1 << BIT_PPU_CTL_POWER
 
-def BIT_PPU_CTL_WINDOW_MAP equ 6 ; whether the Window is enabled                          [r/w]
+def BIT_PPU_CTL_WINDOW_MAP equ 6 ; which tilemap the Window reads from                    [r/w]
   def PPU_CTL_WINDOW_MAP_9800 equ 0 << BIT_PPU_CTL_WINDOW_MAP
   def PPU_CTL_WINDOW_MAP_9C00 equ 1 << BIT_PPU_CTL_WINDOW_MAP
 
-def BIT_PPU_CTL_WINDOW_ENA equ 5 ; which tilemap the Window reads from                    [r/w]
+def BIT_PPU_CTL_WINDOW_ENA equ 5 ; whether the Window is enabled                          [r/w]
   def PPU_CTL_WINDOW_OFF equ 0 << BIT_PPU_CTL_WINDOW_ENA
   def PPU_CTL_WINDOW_ON  equ 1 << BIT_PPU_CTL_WINDOW_ENA
 
