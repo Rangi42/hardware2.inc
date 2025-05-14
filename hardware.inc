@@ -688,7 +688,7 @@ def SRAM_ENABLE equ $0A ; Note that some MBCs accept any value whose low 4 bits 
 
 ; -- ROM_BANK: ROM bank number (low 8 bits when applicable) -------------------
 if def(TPP1)
-	def rRomBank equ $0000
+	def rRomBank equ $0000 ; MR0 in the TPP1 spec
 elif def(MBC2)
 	def rRomBank equ $2100
 else
@@ -697,14 +697,14 @@ endc
 
 ; -- ROM_BANK_HIGH: ROM bank number (high 8 bits) -----------------------------
 if def(TPP1)
-	def rRomBankHigh equ $0001
+	def rRomBankHigh equ $0001 ; MR1 in the TPP1 spec
 else ; MBC5 only
 	def rRomBankHigh equ $3000
 endc
 
 ; -- SRAM_BANK: SRAM bank number ----------------------------------------------
 if def(TPP1)
-	def rSramBank equ $0002
+	def rSramBank equ $0002 ; MR2 in the TPP1 spec
 else
 	def rSramBank equ $4000
 endc
@@ -727,6 +727,40 @@ def BIT_SRAM_BANK_RUMBLE equ 3
 
 ; -- RTC_LATCH: Write 0 then 1 to this register to latch the MBC3 RTC ---------
 def rRtcLatch equ $6000
+
+; -- TPP1_CTL: (TPP1 only) Mapper control -------------------------------------
+if def(TPP1)
+	def rTpp1Ctl equ $0003 ; on write: MR3 in the TPP1 spec
+
+	; Values that can be written to TPP1_CTL:
+		def TPP1_CTL_SRAM_REGS equ $00 ; map control registers
+		                               ; read from $A000 + <reg> to access the corresponding register
+		                               ; e.g. `ld a, [$A000 + rRomBank]` to read the ROM bank
+	    def TPP1_CTL_SRAM_RO   equ $02 ; map SRAM bank, read-only
+	    def TPP1_CTL_SRAM_RW   equ $03 ; map SRAM bank, read/write
+	    def TPP1_CTL_SRAM_RTC  equ $05 ; map RTC latched registers
+
+	    def TPP1_CTL_RTC_LATCH        equ $10 ; latch RTC registers
+	    def TPP1_CTL_RTC_SET          equ $11 ; copy latched registers to real registers
+	    def TPP1_CTL_RTC_CLR_OVERFLOW equ $14 ; clear RTC overflow flag
+	    def TPP1_CTL_RTC_STOP         equ $18 ; stop RTC
+	    def TPP1_CTL_RTC_START        equ $19 ; start RTC
+
+	    def TPP1_CTL_RUMBLE_OFF     equ $20 ; rumble off
+	    def TPP1_CTL_RUMBLE_ON_SLOW equ $21 ; rumble on, slow
+	    def TPP1_CTL_RUMBLE_ON_MED  equ $22 ; rumble on, medium
+	    def TPP1_CTL_RUMBLE_ON_FAST equ $23 ; rumble on, fast
+
+    def rTpp1Status equ $0003 ; on read: MR4 in the TPP1 spec
+
+    ; Values that can be read from TPP1_STATUS:
+    	def BIT_TPP1_STATUS_RTC_OVERFLOW equ 3 ; RTC overflow flag
+     		def MASK_BIT_TPP1_STATUS_RTC_OVERFLOW equ 1 << BIT_BIT_TPP1_STATUS_RTC_OVERFLOW
+    	def BIT_TPP1_STATUS_RTC_ON       equ 2 ; RTC on flag
+     		def MASK_BIT_TPP1_STATUS_RTC_ON       equ 1 << BIT_BIT_TPP1_STATUS_RTC_ON
+    	def MASK_TPP1_STATUS_RUMBLE      equ %000000_11 ; rumble speed
+
+endc
 
 
 ; *****************************************************************************
