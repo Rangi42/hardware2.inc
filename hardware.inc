@@ -784,6 +784,8 @@ def TILEMAP_WIDTH_TILES  equ 32
 ; *****************************************************************************
 ; *                           OBJ-related constants                           *
 ; *****************************************************************************
+; The `rb` constants are offsets from the beginning of an OBJ's data in OAM.
+; ; In particular, the OAM is `sizeof_Obj * NB_OBJS` bytes long.
 
 rsreset
 def Obj_YPos  rb
@@ -811,6 +813,38 @@ def Obj_Attrs rb
 def sizeof_Obj rb 0
 
 def NB_OBJS equ 40 ; How many OBJs there are room for in OAM
+
+
+; *****************************************************************************
+; *                        Interrupt vector addresses                         *
+; *****************************************************************************
+; Destination address of a sort of `call` the CPU performs whenever some trigger condition is met.
+
+def INT_HANDLER_VBLANK equ $0040
+def INT_HANDLER_PPU    equ $0048
+def INT_HANDLER_TIMER  equ $0050
+def INT_HANDLER_SERIAL equ $0058
+def INT_HANDLER_JOYPAD equ $0060
+
+
+; *****************************************************************************
+; *                          Boot-up register values                          *
+; *****************************************************************************
+
+; Various values that the A register can contain when execution initially starts at $0100
+def BOOTUP_A_DMG equ $01
+	def BOOTUP_A_SGB equ BOOTUP_A_DMG
+def BOOTUP_A_MGB equ $FF
+	def BOOTUP_A_SGB2 equ BOOTUP_A_MGB
+def BOOTUP_A_CGB equ $11
+	def BOOTUP_A_AGB equ BOOTUP_A_CGB
+
+; Bit in the B register that differs between Game Boy Color and Advance
+def BIT_BOOTUP_B_AGB equ 0 ; This bit is clear on Color, but set on Advance
+	def MASK_BOOTUP_B_AGB equ 1 << BIT_BOOTUP_B_AGB
+		def BOOTUP_B_CGB equ 0 << BIT_BOOTUP_B_AGB
+		def BOOTUP_B_AGB equ 1 << BIT_BOOTUP_B_AGB
+
 
 
 endc ; def(HARDWARE_INC)
