@@ -75,3 +75,12 @@
   - Added repository link and CC0 waiver notice
 - **Rev 4.9.2** - 2024-08-18 *(DevEd)*
   - Corrected `CART_ROM_MBC5_BAT` to `CART_ROM_MBC5_RAM`
+- **Rev 4.10.0** - 2025-05-19 *(Rangi42)*
+  - Added `rKEY0`, `rBANK`, and `rRTCREG` registers
+  - Added `rJOYP`, `rVDMA_*`, and `rWBK` register aliases
+  - Added `HARDWARE_INC_VERSION` string constant
+  - Added many more bit number, flag, and value constants
+  - Deprecate `IEB_HILO` and `IEF_HILO` in favor of `IEB_JOYPAD` and `IEF_JOYPAD`
+  - Deprecate memory region and cartridge header constants
+  - Changed formatting and reorganized sections
+  - Moved revision history to separate HISTORY.md file
